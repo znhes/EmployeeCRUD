@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EmployeeCRUDApp.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,6 +46,14 @@ namespace EmployeeCRUDApp.Pages.Employee
 
             try
             {
+                await _context.SaveChangesAsync();
+                var history = new EmployeeHistory
+                {
+                    History = "Updated",
+                    Employee = Employee.Name,
+                    UpdatedDate = DateTime.Now,
+                };
+                _context.EmployeeHistory.Add(history);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

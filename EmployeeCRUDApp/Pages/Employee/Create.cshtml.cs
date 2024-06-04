@@ -34,7 +34,7 @@ namespace EmployeeCRUDApp.Pages.Employee
             var history = new EmployeeHistory
             {
                 History = "Created",
-                EmployeeId = Employee.Id,
+                Employee = Employee.Name,
                 UpdatedDate = DateTime.Now,
             };
             _context.EmployeeHistory.Add(history);

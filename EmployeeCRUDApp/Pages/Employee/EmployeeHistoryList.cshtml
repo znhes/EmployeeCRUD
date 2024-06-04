@@ -1,0 +1,47 @@
+﻿@page
+@model EmployeeCRUDApp.Pages.Employee.EmployeeHistoryListModel
+@{
+}
+@{
+    ViewData["Title"] = "Employee History";
+}
+
+<div class="row">
+    <div class="col-10">
+        <h1>Employee History</h1>
+    </div>
+   
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+              Employee Name
+            </th>
+            <th>
+               Change
+            </th>
+            <th>
+               Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EmployeeHistory)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.History)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+              
+            </tr>
+        }
+    </tbody>
+</table>

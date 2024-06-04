@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EmployeeCRUDApp.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,13 +45,25 @@ namespace EmployeeCRUDApp.Pages.Employee
             }
 
             var employee = await _context.Employee.FindAsync(id);
+            
             if (employee != null)
             {
+                var history = new EmployeeHistory
+                {
+                    History = "Deleted ",
+                    Employee = employee.Name,
+                    UpdatedDate = DateTime.Now,
+                };
+
                 Employee = employee;
                 _context.Employee.Remove(Employee);
                 await _context.SaveChangesAsync();
-            }
 
+                _context.EmployeeHistory.Add(history);
+                await _context.SaveChangesAsync();
+            }
+            
+           
             return RedirectToPage("./Index");
         }
     }
