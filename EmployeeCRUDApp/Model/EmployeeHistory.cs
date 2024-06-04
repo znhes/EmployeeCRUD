@@ -6,5 +6,6 @@
         public string? History { get; set; }
         public virtual Employee Employee { get; set; }
         public int? EmployeeId { get; set; }
+        public DateTime UpdatedDate { get; set; }
     }
 }

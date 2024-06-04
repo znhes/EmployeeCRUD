@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EmployeeCRUDApp.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EmployeeCRUDApp.Pages.Employee
@@ -28,8 +29,16 @@ namespace EmployeeCRUDApp.Pages.Employee
             }
 
             _context.Employee.Add(Employee);
-            await _context.SaveChangesAsync();
+            var savedData =await _context.SaveChangesAsync();
 
+            var history = new EmployeeHistory
+            {
+                History = "Created",
+                EmployeeId = Employee.Id,
+                UpdatedDate = DateTime.Now,
+            };
+            _context.EmployeeHistory.Add(history);
+            await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }
     }
